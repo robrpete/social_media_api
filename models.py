@@ -6,8 +6,8 @@ from typing import Optional
 class User(BaseModel):
     username: str
     password: str
-    email: EmailStr
-    last_seen: Optional[list[date, time]] = None
+    email: str
+    last_seen: str = None
 
 
 class Post(BaseModel):
