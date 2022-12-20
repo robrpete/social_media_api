@@ -17,3 +17,9 @@ async def create_user(user):
     document = user
     result = await collection_users.insert_one(document)
     return document
+
+
+async def create_post(post):
+    document = post
+    result = await collection_posts.insert_one(document)
+    return document

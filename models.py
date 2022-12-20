@@ -13,6 +13,6 @@ class User(BaseModel):
 class Post(BaseModel):
     user: User
     content: str
-    created: date
+    created: str
     likes: Optional[int] = None
     comment: Optional[str] = None
