@@ -6,7 +6,7 @@ from typing import Optional
 class User(BaseModel):
     username: str
     password: str
-    email: str
+    email: str = None
     last_seen: str = None
 
 

@@ -10,5 +10,4 @@ app.include_router(posts.router)
 @app.get('/')
 async def test():
     response = 'ok'
-
     return {'res': response}

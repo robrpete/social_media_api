@@ -1,6 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from models import User
-from database import create_user
+from database import (
+    create_user,
+    get_user,
+    sign_out_user,
+)
 
 router = APIRouter(
     tags=["User Routes"]
@@ -15,11 +19,17 @@ async def create_user_(user: User):
     raise HTTPException(400, "Bad Request")
 
 
-@router.get("/user/signin")
-async def sign_in():
-    return {"user": "signed in user"}
+@router.get("/user/signin", response_model=User)
+async def sign_in(username: str, password: str):
+    response = await get_user(username, password)
+    if response:
+        return response
+    raise HTTPException(400, "Bad Request")
 
 
-@router.get("/user/signout")
-async def sign_out():
-    return {"user": "signed out"}
+@router.get("/user/signout", response_model=User)
+async def sign_out(username: str, password: str):
+    response = await sign_out_user(username, password)
+    if response:
+        return response
+    raise HTTPException(400, "Bad Request")
