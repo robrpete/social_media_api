@@ -37,3 +37,20 @@ async def create_post(post):
     document = post
     result = await collection_posts.insert_one(document)
     return document
+
+
+async def edit_post(username, password, content):
+    old_document = await collection_posts.update_one(
+        {"user.username": username, "user.password": password}, {"$set": {"content": content}})
+    new_document = await collection_posts.find_one(
+        {"user.username": username, "user.password": password})
+    return new_document
+
+
+async def get_user_posts(username, password):
+    results = []
+    cursor = collection_posts.find(
+        {"user.username": username, "user.password": password})
+    async for doc in cursor:
+        results.append(Post(**doc))
+    return results
